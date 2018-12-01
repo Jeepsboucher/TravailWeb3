@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    /*if( !isset($_SESSION['etat']) )
-    {
-        header('Location: View/Connexion.php');
-    }*/
-?>
+session_start();
+if (!isset($_SESSION['id']))
+{
+    require 'index.php';
+}
+ ?>

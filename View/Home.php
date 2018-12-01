@@ -1,6 +1,5 @@
 <?php
     require("MainMenu.php");
-    include 'SessionValide.php';
 echo $_SESSION['etat'];
 echo $_SESSION['nomUtilisateur'];
 echo $_SESSION['id'];

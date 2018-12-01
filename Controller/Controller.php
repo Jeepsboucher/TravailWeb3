@@ -26,11 +26,13 @@
 
     function Authentification()
     {
+        $_SESSION['echecinscription'] = '0';
         require 'View/Home.php';
     }
 
     function EchecInscription()
     {
+        $_SESSION['echecinscription'] = '1';
          require 'View/Connexion.php';
     }
 
@@ -88,8 +90,8 @@
             $ManagerLike = new ManagerLike;
             $resultatConnexion = $ManagerLike->checkIfUsernameExist($nomUtilisateur);
             
-            $donnees = $resultatConnexion->fetchAll(); 
-            $usagerExistant = $donnees[0]['username'];
+            $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
+            $usagerExistant = $donnees;
             if ($usagerExistant)
             {
                 Echecinscription();

@@ -1,0 +1,3 @@
+function Erreur(){
+    swal("erreur");
+}
