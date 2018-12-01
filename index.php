@@ -1,6 +1,5 @@
 <?php
 require 'Controller/Controller.php';
-
 try {
     if  (!empty($_GET['action'])){
         if ($_GET['action']=="Authentification"){

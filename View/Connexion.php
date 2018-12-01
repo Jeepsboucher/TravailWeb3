@@ -1,12 +1,15 @@
-
-   <?php 
-    session_start(); 
-
+<?php 
     if(isset($_SESSION['echecinscription'])){
             echo 'session : ' . $_SESSION['echecinscription'];
         if($_SESSION['echecinscription'] == 1)
         {
-            require 'popupErreur.js';
+            echo 'il entre';
+            ?>
+              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script type="text/javascript">
+            swal("Erreur","Ce nom d'utilisateur est déjà pris!","error");
+</script>
+;            <?php
         }
     }
 ?>
@@ -20,6 +23,7 @@
 <title>Page de login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <script src="JS/popupErreur.js"></script>
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
     <![endif]-->

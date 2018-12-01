@@ -1,5 +1,4 @@
 <?php
-    include 'SessionValide.php';
 	require ('Model/ManagerLike.php');
 
     function donne_nom()
@@ -113,8 +112,8 @@
                  } 
              }*/
             
-            $donnees = $resultatConnexion->fetchAll(); 
-            $usagerExistant = $donnees[0]['username'];
+            $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
+            $usagerExistant = $donnees;
             if ($usagerExistant)
             {
                 Echecinscription();
