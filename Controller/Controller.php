@@ -1,4 +1,5 @@
 <?php
+    include 'SessionValide.php';
 	require ('Model/ManagerLike.php');
 
     function donne_nom()
@@ -31,11 +32,13 @@
 
     function Authentification()
     {
+        $_SESSION['echecinscription'] = '0';
         require 'View/Home.php';
     }
 
     function EchecInscription()
     {
+        $_SESSION['echecinscription'] = '1';
          require 'View/Connexion.php';
     }
 
@@ -136,7 +139,7 @@
 						$idCategorie = $_SESSION['categorie'];
 						$idPays = $_SESSION['pays'];
 						$description = $_SESSION['description'];
-					    $ManagerLike->addPicture("1",$idCategorie,$idPays,$description,$path);
+					    $ManagerLike->addPicture($_SESSION['id'],$idCategorie,$idPays,$description,$path);
 					}
 				}
 			}

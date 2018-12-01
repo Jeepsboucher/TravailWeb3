@@ -1,11 +1,22 @@
-<?php 
+
+   <?php 
     session_start(); 
+
+    if(isset($_SESSION['echecinscription'])){
+            echo 'session : ' . $_SESSION['echecinscription'];
+        if($_SESSION['echecinscription'] == 1)
+        {
+            require 'popupErreur.js';
+        }
+    }
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="CSS/Design.css" type="text/css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <title>Page de login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -53,7 +64,6 @@
                     </p>
                 </center>
             </div>
-            
             <div class="pure-u-1 pure-u-md-6-24 pure-u-lg-6-24" style="display:inline-block;">
                 <center>
                    <div onclick="FNInscription()">
