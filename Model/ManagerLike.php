@@ -33,6 +33,14 @@ class ManagerLike extends Connexion
     $resultat-> execute();
     }
     
+    public function GetUserId($username){
+	$sql =  'SELECT id_participant from tbl_participant where username = :username'; 
+    $resultat = self::getConnexion()->prepare($sql);
+    $resultat->bindParam('username', $username, PDO::PARAM_STR);
+    $resultat-> execute();
+    return $resultat;
+	}
+    
     public function addPicture($id_participant,$id_categorie,$id_pays,$description,$path){
     $sql = "insert into tbl_photo (path,description,id_participant,id_pays,id_categorie)
     values (:path,:description,:id_participant,:id_pays,:id_categorie)";
