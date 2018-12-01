@@ -25,7 +25,7 @@
             </div>
             <div class="pure-u-2-5 pure-u-md-2-5 pure-u-lg-2-5 form-box"> <!-- pour centrer -->
                 <h1>Importer une image sur le site</h1>       
-                <form class="pure-form pure-form-aligned" id="mon_formulaire" method="Post" action="upload.php" type="actionForm" enctype="multipart/form-data">
+                <form class="pure-form pure-form-aligned" id="mon_formulaire" method="Post" action="index.php?action=UploadPhoto" type="actionForm" enctype="multipart/form-data">
                 <fieldset>
                 <div class="pure-control-group">
                     <select name="categorie" id="categorie" >	

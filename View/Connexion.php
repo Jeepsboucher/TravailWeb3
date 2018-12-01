@@ -1,5 +1,5 @@
 <?php 
-    include 'SessionValide.php';
+     session_start();
 ?>
 
 <!DOCTYPE HTML>

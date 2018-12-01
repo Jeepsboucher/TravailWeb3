@@ -1,11 +1,6 @@
 <?php
 	require ('Model/ManagerLike.php');
 
-    function donne_nom()
-    {
-        return date("Y-m-d H-i-s");
-    }
-
     function ChargerLesChampsAjoutPhoto()
     {
         $ManagerLike = new ManagerLike;
@@ -81,12 +76,6 @@
                 $_SESSION['etat'] = 'connecte';
                 Authentification();  
             }
-            
-            
-            /*if ($resultatConnexion->columnCount() == 1)
-            {
-                Authentification();  			  
-            }*/
             else
             {
                 Connexion();
@@ -98,17 +87,6 @@
         if ( !empty($nomComplet) and (!empty($nomUtilisateur)) and (!empty($motDePasse)) and (!empty($courriel)) ){
             $ManagerLike = new ManagerLike;
             $resultatConnexion = $ManagerLike->checkIfUsernameExist($nomUtilisateur);
-            
-             /*while ($donnees = $resultatConnexion->fetch()) {
-                 if( $donnees['username'] == $nomUtilisateur){
-                     Echecinscription();
-                     break;
-                 }
-                 else{
-                     Inscription($nomComplet,$nomUtilisateur,$motDePasse,$courriel);
-                     break;
-                 } 
-             }*/
             
             $donnees = $resultatConnexion->fetchAll(); 
             $usagerExistant = $donnees[0]['username'];
@@ -144,5 +122,6 @@
 				}
 			}
 		}
+        ChargerLesChampsAjoutPhoto();
     }
 ?>   

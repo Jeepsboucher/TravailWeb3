@@ -1,5 +1,5 @@
 <?php
-require 'Controller/Controller.php';
+require_once 'Controller/Controller.php';
 
 try {
     if  (!empty($_GET['action'])){
@@ -11,6 +11,12 @@ try {
         }
         else if ($_GET['action']=="AjouterPhoto"){
             ChargerLesChampsAjoutPhoto();
+        }
+        else if (isset($_SESSION['path'])){
+            EnregistrerPhoto();
+        }
+        else if ($_GET['action']=="UploadPhoto"){
+            UploadPhoto();
         }
         else if ($_GET['action']=="Explorer"){
             AfficherExplorer();
