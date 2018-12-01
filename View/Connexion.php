@@ -1,7 +1,8 @@
 <?php 
-    session_start(); 
+    include 'SessionValide.php';
 ?>
-<!doctype html>
+
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">

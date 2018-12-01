@@ -74,6 +74,9 @@
             $usagerExistant = ($donnees[0]['MyCount'] == 1);
             if ($usagerExistant)
             {
+                $resultat = $ManagerLike->GetUserId($nomUtilisateur);
+                $userID = $resultat->fetchAll();
+                $_SESSION['id'] = ($userID[0]['id_participant']);
                 $_SESSION['nomUtilisateur'] = $nomUtilisateur;
                 $_SESSION['etat'] = 'connecte';
                 Authentification();  
@@ -136,7 +139,7 @@
 						$idCategorie = $_SESSION['categorie'];
 						$idPays = $_SESSION['pays'];
 						$description = $_SESSION['description'];
-					    $ManagerLike->addPicture("1",$idCategorie,$idPays,$description,$path);
+					    $ManagerLike->addPicture($_SESSION['id'],$idCategorie,$idPays,$description,$path);
 					}
 				}
 			}

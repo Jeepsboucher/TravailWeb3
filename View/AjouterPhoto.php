@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require('MainMenu.php');
     include 'SessionValide.php';
 ?>
