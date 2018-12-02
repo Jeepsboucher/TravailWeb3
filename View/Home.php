@@ -12,6 +12,7 @@
         <title>Concours de photographie</title>
         <link href="jquery-ui.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="CSS/Design.css">
+        <link rel="stylesheet" type="text/css" href="CSS/ImageModal.css">
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
         <![endif]-->
@@ -19,6 +20,7 @@
             <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
         <!--<![endif]-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <script lang="Javascript">
             function AddToFavorites(iconId)
             {
@@ -56,12 +58,15 @@
                         <br>
 
                        <!-- 10 PHOTOS LES PLUS AIMÉES, FAIRE APPARAITRE LES DIVS AU DUR ET À MESURE -->
+          
                         <div style="background-color:#f2f2f2;">
                            <br>
                            <?php while ($donnees = $resultatLesPlusAimees->fetch()) {    
                                 ?>
-                                <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4" id="1" style="vertical-align:middle;text-align:center;">
-                                    <img class="pure-img" src="<?php echo $donnees['path']?>" title="" style="width:auto;height:auto;max-width:300px">
+                                <div class="pure-u-1-4 pure-u-md-1-1 pure-u-lg-1-4" id="1" style="vertical-align:middle;text-align:center;">
+                                    <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" style="width:auto;height:auto;max-width:300px;curso:pointer" onclick="modal(this)"
+                                    class="modal-hover-opacity">
+                                    
                                      <div onclick="AddToFavorites('img<?php echo $donnees['id_photo']?>')">
                                          <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;">favorite_border</i>
                                          <label><?php echo $donnees['count']?></label>
@@ -102,6 +107,22 @@
                 </form>
             </div>
         </div>
+        <div id="modal01" class="modal" onclick="this.style.display='none'">
+         <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <div class="modal-content" style="text-align:center">
+                <img id="img01" style="max-width:99%">
+                <br><br>
+                <label id="label01" style="color:white;" ></label>
+            </div>
+        </div>
+        <script>
+        function modal(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("label01").textContent = element.title;
+        document.getElementById("modal01").style.display = "block";
+        }
+        </script>
+        
     </body>
 </html>
 <?php
