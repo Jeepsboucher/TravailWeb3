@@ -82,7 +82,7 @@ class ManagerLike extends Connexion
 
     public function ObtenirListePays()
     {
-        $sql = 'select * from tbl_pays';
+        $sql = 'select * from tbl_pays order by nom';
         $resultat = self::getConnexion()->prepare($sql);
         $resultat->execute();
         return $resultat;

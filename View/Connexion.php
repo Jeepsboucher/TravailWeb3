@@ -1,4 +1,5 @@
 <?php 
+    include 'SessionValide.php';
     if(isset($_SESSION['echecinscription'])){
         echo $_SESSION['echecinscription'];
         if($_SESSION['echecinscription'] == 1){

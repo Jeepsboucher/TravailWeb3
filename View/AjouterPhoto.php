@@ -1,5 +1,7 @@
 <?php
     include 'SessionValide.php';
+    echo $_SESSION['id'];
+    
     require('MainMenu.php');
 ?>
 
@@ -20,12 +22,13 @@
     </head>
     
     <body>                   
+        <form class="pure-form pure-form-aligned" id="ajoutPhoto" name="ajoutPhoto" method="Post" action="#" type="actionForm" enctype="multipart/form-data">
         <div class="pure-g">
             <div class="pure-u-1-6 pure-u-md-1-6 pure-u-lg-1-6">
             </div>
             <div class="pure-u-2-5 pure-u-md-2-5 pure-u-lg-2-5 form-box"> <!-- pour centrer -->
                 <h1>Importer une image sur le site</h1>       
-                <form class="pure-form pure-form-aligned" id="mon_formulaire" method="Post" action="index.php?action=UploadPhoto" type="actionForm" enctype="multipart/form-data">
+
                 <fieldset>
                 <div class="pure-control-group">
                     <select name="categorie" id="categorie" >	
@@ -66,8 +69,33 @@
                         <input class="submit pure-button pure-button-primary" type="submit" value="Envoyer"/>
                     </div>
                    </fieldset>
-                </form>  
+                
             </div>
         </div>
+        </form>  
+    <script type="text/javascript" src="jquery-validation-1.17.0/lib/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="jquery-validation-1.17.0/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="jquery-validation-1.17.0/dist/localization/messages_fr.js"></script>
+    <script type="text/javascript">
+    $("#ajoutPhoto").validate({
+        errorClass : "mon_erreur_class",
+        errorElement : "em",
+        rules: {
+            fichier : {
+                required : true,
+            },
+        },
+        messages:{
+            fichier : {
+                required : ' Vous devez obligatoirement avoir un fichier',
+            }
+        }
+   });
+</script>
+   <style>
+    .mon_erreur_class {
+        color : red;
+    }
+</style>
     </body>
 </html>

@@ -70,14 +70,14 @@
             $ManagerLike = new ManagerLike;
             $resultatConnexion = $ManagerLike->checkIfUserCanConnect($nomUtilisateur,$motDePasse);
             
-            $donnees = $resultatConnexion->fetchAll(); 
-            $usagerExistant = ($donnees[0]['MyCount'] == 1);
+            $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
+            $usagerExistant = $donnees;
             if ($usagerExistant)
             {
                 $resultat = $ManagerLike->GetUserId($nomUtilisateur);
-                $userID = $resultat->fetchAll();
+                $userID = $resultat->fetch();
                 session_start();
-                $_SESSION['id'] = ($userID[0]['id_participant']);
+                $_SESSION['id'] = ($userID['id_participant']);
                 $_SESSION['nomUtilisateur'] = $nomUtilisateur;
                 $_SESSION['etat'] = 'connecte';
                 Authentification();  

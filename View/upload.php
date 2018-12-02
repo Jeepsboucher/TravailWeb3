@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'SessionValide.php';
 require('fctredimimage.php');
 
 try {

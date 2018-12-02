@@ -1,9 +1,9 @@
 <?php
     include 'SessionValide.php';
     require("MainMenu.php");
-echo $_SESSION['etat'];
-echo $_SESSION['nomUtilisateur'];
-echo $_SESSION['id'];
+    echo $_SESSION['etat'];
+    echo $_SESSION['nomUtilisateur'];
+    echo $_SESSION['id'];
 ?>
 
 <html>
@@ -115,5 +115,7 @@ echo $_SESSION['id'];
         </div>
     </body>
 </html>
-
+<?php
+$_SESSION['id'] = $_SESSION['id'];
+?>
 
