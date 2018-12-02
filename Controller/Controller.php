@@ -40,6 +40,8 @@
     }
 
     function AfficherMenuPrincipal(){	
+        $ManagerMenuPrincipal = new ManagerLike;
+        $resultatMenu = $ManagerMenuPrincipal
 		require 'View/Home.php';
 	}
 
