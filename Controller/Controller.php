@@ -53,14 +53,20 @@
         require 'View/Favoris.php';
     }
 
-    function AfficherExplorer()
+    function AfficherExplorerCategories()
     {
         $ManagerCategorie = new ManagerLike;
         $resultatCategorie = $ManagerCategorie->ObtenirCategoriePhoto();
-        $ManagerPhotos = new ManagerLike;
-        $resultatPhotos = $ManagerPhotos->ObtenirPhotos();
         require 'View/Explorer.php';
     }
+
+    function AfficherExplorerPhotos($categorie)
+    {
+        $ManagerPhotos = new ManagerLike();
+        $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategoris($categorie);
+        require 'View/Vue_ExplorerPhotos.php';
+    }
+    
 
     function AfficherFAQ()
     {

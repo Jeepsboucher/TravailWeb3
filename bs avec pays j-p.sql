@@ -343,14 +343,57 @@ values ('2018-12-02','1','1'),
 ('2018-12-02','1','5'),
 ('2018-12-02','1','6'),
 ('2018-12-02','2','6'),
-('2018-12-02','3','6'),
 ('2018-12-02','4','6');
 
-CREATE PROCEDURE listePhotosSelonFavoris()
+
+DELIMITER | 
+
+CREATE PROCEDURE listePhotosSelonCategorie(IN vcodeCategorie INT)
 BEGIN
-	SELECT COUNT(*) tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+	CREATE TEMPORARY TABLE Favoris(
+		id_photo       INT,
+		nombreFavoris  INT
+    );
+
+	INSERT INTO Favoris(id_photo, nombreFavoris)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' from tbl_vote_photo RIGHT JOIN tbl_photo ON tbl_photo.id_photo = tbl_vote_photo.id_photo group by id_photo order by compte DESC;
+    
+    SELECT Favoris.nombreFavoris, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    FROM tbl_photo
+    LEFT JOIN tbl_vote_photo
+    ON tbl_vote_photo.id_photo = tbl_photo.id_photo
+    LEFT JOIN Favoris
+    ON tbl_photo.id_photo = Favoris.id_photo
+    WHERE id_categorie = vcodeCategorie
+    GROUP BY tbl_photo.id_photo
+    ORDER BY NombreFavoris DESC;
+    
+  DROP TEMPORARY TABLE Favoris;
+  
+END |
+
+
+DELIMITER | 
+
+CREATE PROCEDURE listePhotos()
+BEGIN
+	CREATE TEMPORARY TABLE Favoris(
+		id_photo       INT,
+		nombreFavoris  INT
+    );
+
+	INSERT INTO Favoris(id_photo, nombreFavoris)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' from tbl_vote_photo RIGHT JOIN tbl_photo ON tbl_photo.id_photo = tbl_vote_photo.id_photo group by id_photo order by compte DESC;
+    
+    SELECT Favoris.nombreFavoris, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     INNER JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
-    ORDER BY tbl_vote_photo.
-END
+    LEFT JOIN Favoris
+    ON tbl_photo.id_photo = Favoris.id_photo
+    GROUP BY tbl_photo.id_photo
+    ORDER BY NombreFavoris DESC;
+    
+  DROP TEMPORARY TABLE Favoris;
+  
+END |

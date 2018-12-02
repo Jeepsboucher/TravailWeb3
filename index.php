@@ -18,7 +18,7 @@ try {
             UploadPhoto();
         }
         else if ($_GET['action']=="Explorer"){
-            AfficherExplorer();
+            AfficherExplorerCategories();
         }
         else if ($_GET['action']=="Favoris"){
             AfficherFavoris();
@@ -40,6 +40,9 @@ try {
         }
         else if ( !empty($_POST['nomCompletIns']) && !empty($_POST['nomUtilisateurIns']) && !empty($_POST['motDePasseIns']) && !empty($_POST['motDePasseValidation']) && !empty($_POST['courrielIns']) ){
             ValiderInscription(htmlentities($_POST['nomCompletIns']),htmlentities($_POST['nomUtilisateurIns']),htmlentities($_POST['motDePasseIns']),htmlentities($_POST['motDePasseValidation']),htmlentities($_POST['courrielIns']));
+        }
+        else if (isset($_POST['id_categorie'])){
+                AfficherExplorerPhotos(htmlentities($_POST['id_categorie']));
         }
         else {
             Connexion();

@@ -80,10 +80,11 @@ class ManagerLike extends Connexion
         return $resultat;
     }
     
-    public function ObtenirPhotos()
+    public function ObtenirPhotosSelonCategoris($categorie)
     {
-        $sql = 'select * from tbl_photo';
+        $sql = 'CALL listePhotosSelonCategorie(:categorie)';
         $resultat = self::getConnexion()->prepare($sql);
+        $resultat->bindParam('categorie', $categorie, PDO::PARAM_INT);
         $resultat->execute();
         return $resultat;
     }
