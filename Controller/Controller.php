@@ -57,6 +57,8 @@
     {
         $ManagerCategorie = new ManagerLike;
         $resultatCategorie = $ManagerCategorie->ObtenirCategoriePhoto();
+        $ManagerPhotos = new ManagerLike;
+        $resultatPhotos = $ManagerPhotos->ObtenirPhotos();
         require 'View/Explorer.php';
     }
 
