@@ -21,6 +21,10 @@
 
     function Deconnexion()
     {
+        if(session_status() == PHP_SESSION_ACTIVE) {
+            session_destroy(); 
+            session_unset(); 
+        }
         require 'View/Connexion.php';
     }
 
@@ -32,7 +36,6 @@
 
     function EchecInscription()
     {
-        $_SESSION['echecinscription'] = '1';
          require 'View/Connexion.php';
     }
 
@@ -73,6 +76,7 @@
             {
                 $resultat = $ManagerLike->GetUserId($nomUtilisateur);
                 $userID = $resultat->fetchAll();
+                session_start();
                 $_SESSION['id'] = ($userID[0]['id_participant']);
                 $_SESSION['nomUtilisateur'] = $nomUtilisateur;
                 $_SESSION['etat'] = 'connecte';
@@ -80,26 +84,34 @@
             }
             else
             {
+                $_SESSION['echecinscription'] = '3';
                 Connexion();
             } 
         }      
     }
 
-    function ValiderInscription($nomComplet,$nomUtilisateur,$motDePasse,$courriel){
-        if ( !empty($nomComplet) and (!empty($nomUtilisateur)) and (!empty($motDePasse)) and (!empty($courriel)) ){
-            $ManagerLike = new ManagerLike;
-            $resultatConnexion = $ManagerLike->checkIfUsernameExist($nomUtilisateur);
-            
-            $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
-            $usagerExistant = $donnees;
-            if ($usagerExistant)
-            {
+    function ValiderInscription($nomComplet,$nomUtilisateur,$motDePasse,$motDePasseVailation,$courriel){
+        if ( !empty($nomComplet) and (!empty($nomUtilisateur)) and (!empty($motDePasse)) and (!empty($motDePasseVailation)) and (!empty($courriel)) ){
+            if ($motDePasse == $motDePasseVailation){
+                $ManagerLike = new ManagerLike;
+                $resultatConnexion = $ManagerLike->checkIfUsernameExist($nomUtilisateur);
+
+                $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
+                $usagerExistant = $donnees;
+                if ($usagerExistant)
+                {
+                    $_SESSION['echecinscription'] = '1';
+                    Echecinscription();
+                }
+                else
+                {
+                    Inscription($nomComplet,$nomUtilisateur,$motDePasse,$courriel);
+                } 
+            }
+            else {
+                $_SESSION['echecinscription'] = '2';
                 Echecinscription();
             }
-            else
-            {
-                Inscription($nomComplet,$nomUtilisateur,$motDePasse,$courriel);
-            } 
         }      
     }
 

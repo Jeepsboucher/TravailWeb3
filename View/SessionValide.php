@@ -1,7 +1,10 @@
 <?php
-session_start();
+if(session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['id']))
 {
-    require 'index.php';
+    header('Location: index.php');
+    //require 'Connexion.php';
 }
  ?>

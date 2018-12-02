@@ -38,8 +38,8 @@ try {
         if ( !empty($_POST['nomUtilisateur']) && !empty($_POST['motDePasse'])){
             ValiderInformations(htmlentities($_POST['nomUtilisateur']),htmlentities($_POST['motDePasse']));
         }
-        else if ( !empty($_POST['nomCompletIns']) && !empty($_POST['nomUtilisateurIns']) && !empty($_POST['motDePasseIns']) && !empty($_POST['courrielIns']) ){
-            ValiderInscription(htmlentities($_POST['nomCompletIns']),htmlentities($_POST['nomUtilisateurIns']),htmlentities($_POST['motDePasseIns']),htmlentities($_POST['courrielIns']));
+        else if ( !empty($_POST['nomCompletIns']) && !empty($_POST['nomUtilisateurIns']) && !empty($_POST['motDePasseIns']) && !empty($_POST['motDePasseValidation']) && !empty($_POST['courrielIns']) ){
+            ValiderInscription(htmlentities($_POST['nomCompletIns']),htmlentities($_POST['nomUtilisateurIns']),htmlentities($_POST['motDePasseIns']),htmlentities($_POST['motDePasseValidation']),htmlentities($_POST['courrielIns']));
         }
         else {
             Connexion();

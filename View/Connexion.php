@@ -1,15 +1,29 @@
 <?php 
     if(isset($_SESSION['echecinscription'])){
-            echo 'session : ' . $_SESSION['echecinscription'];
-        if($_SESSION['echecinscription'] == 1)
-        {
-            echo 'il entre';
-            ?>
-              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        echo $_SESSION['echecinscription'];
+        if($_SESSION['echecinscription'] == 1){
+?>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
             <script type="text/javascript">
-            swal("Erreur","Ce nom d'utilisateur est déjà pris!","error");
-</script>
-;            <?php
+                swal("Erreur","Ce nom d'utilisateur est déjà pris!","error");
+            </script>;       
+<?php 
+        }
+        else if($_SESSION['echecinscription'] == 2){
+?>    
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script type="text/javascript">
+                swal("Erreur","Les mots de passe ne sont pas équivalents!","error");
+            </script>;   
+<?php 
+        }
+        else if($_SESSION['echecinscription'] == 3){
+?>    
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script type="text/javascript">
+                swal("Erreur","Vos informations sont incorrectes","error");
+            </script>;   
+<?php 
         }
     }
 ?>
@@ -110,6 +124,9 @@
                                <label class="pure-input-1-2" for="motDePasseIns">Mot de passe: </label>
                                <input type="text" class="pure-input-1-2" id="motDePasseIns" name="motDePasseIns"/>
                                <br><br>
+                               <label class="pure-input-1-2" for="motDePasseValidation">Validation du mot de passe: </label>
+                               <input type="text" class="pure-input-1-2" id="motDePasseValidation" name="motDePasseValidation"/>
+                               <br><br>
                                <label class="pure-input-1-2" for="courrielIns">Courriel: </label>
                                <input type="text" class="pure-input-1-2" id="courrielIns" name="courrielIns"/>
                                <br><br><br>
@@ -147,8 +164,10 @@
         </div>
     </form>
 <?php 
+    if(session_status() == PHP_SESSION_ACTIVE) {
     session_destroy(); 
     session_unset(); 
+}
 ?>
 </body>
 </html> 

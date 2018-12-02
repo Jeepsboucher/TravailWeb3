@@ -1,4 +1,5 @@
 <?php
+    include 'SessionValide.php';
     require("MainMenu.php");
 echo $_SESSION['etat'];
 echo $_SESSION['nomUtilisateur'];
