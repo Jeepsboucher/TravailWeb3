@@ -58,30 +58,19 @@
                        <!-- 10 PHOTOS LES PLUS AIMÉES, FAIRE APPARAITRE LES DIVS AU DUR ET À MESURE -->
                         <div style="background-color:#f2f2f2;">
                            <br>
-                            <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4" id="1">
-                                <img class="pure-img" src="Images/beach1.jpg" title="" style="width:100px;height:auto;">
-                                    <div onclick="AddToFavorites('img1')">
-                                        <i id="img1" class="material-icons" style="cursor:pointer;">favorite_border</i>
-                                    </div>
-                            </div>
-                            <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4"  id="2">
-                                <img class="pure-img" src="Images/waterfall1.jpg" title="" style="width:100px;height:auto;">
-                                <div onclick="AddToFavorites('img2')">
-                                    <i id="img2" class="material-icons" style="cursor:pointer;">favorite_border</i>
+                           <?php while ($donnees = $resultatLesPlusAimees->fetch()) {    
+                                ?>
+                                <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4" id="1" style="vertical-align:middle;text-align:center;">
+                                    <img class="pure-img" src="<?php echo $donnees['path']?>" title="" style="width:auto;height:auto;max-width:300px">
+                                     <div onclick="AddToFavorites('img<?php echo $donnees['id_photo']?>')">
+                                         <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;">favorite_border</i>
+                                         <label><?php echo $donnees['count']?></label>
+                                     </div>
                                 </div>
-                            </div>
-                            <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4" id="3">
-                                <img class="pure-img" src="Images/castle1.jpg" title="" style="width:100px;height:auto;">
-                                <div onclick="AddToFavorites('img3')">
-                                    <i id="img3" class="material-icons" style="cursor:pointer;">favorite_border</i>
-                                </div>
-                            </div>
-                            <div class="pure-u-1-4 pure-u-md-1-4 pure-u-lg-1-4" id="4">
-                                <img class="pure-img" src="Images/beach1.jpg" title="" style="width:100px;height:auto;">
-                                <div onclick="AddToFavorites('img4')">
-                                    <i id="img4" class="material-icons" style="cursor:pointer;">favorite_border</i>
-                                </div>
-                            </div>
+                                <?php
+                                }
+                            $resultatLesPlusAimees->closeCursor();
+                            ?>
                             <br>
                         </div>
                     </div>

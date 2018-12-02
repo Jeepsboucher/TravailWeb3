@@ -338,19 +338,42 @@ values ('2018-12-02','1','1'),
 ('2018-12-02','4','1'),
 ('2018-12-02','1','2'),
 ('2018-12-02','2','2'),
+('2018-12-02','3','2'),
 ('2018-12-02','1','3'),
+('2018-12-02','2','3'),
+('2018-12-02','4','2'),
 ('2018-12-02','1','4'),
+('2018-12-02','2','4'),
 ('2018-12-02','1','5'),
+('2018-12-02','2','5'),
 ('2018-12-02','1','6'),
 ('2018-12-02','2','6'),
-('2018-12-02','3','6'),
-('2018-12-02','4','6');
+('2018-12-02','4','6'),
+('2018-12-02','1','7'),
+('2018-12-02','2','7'),
+('2018-12-02','1','8'),
+('2018-12-02','1','9'),
+('2018-12-02','2','9'),
+('2018-12-02','1','10'),
+('2018-12-02','1','11'),
+('2018-12-02','2','11'),
+('2018-12-02','1','12'),
+('2018-12-02','2','12');
 
-CREATE PROCEDURE listePhotosSelonFavoris()
-BEGIN
-	SELECT COUNT(*) tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
-    FROM tbl_photo
-    INNER JOIN tbl_vote_photo
-    ON tbl_vote_photo.id_photo = tbl_photo.id_photo
-    ORDER BY tbl_vote_photo.
-END
+drop procedure if exists ObtenirListeDesPlusAimees;
+delimiter |
+create procedure ObtenirListeDesPlusAimees()
+begin
+
+create temporary table tempo(
+        id_photo   Int   NOT NULL,
+        count   Int   NOT NULL
+);
+
+insert into tempo (id_photo,count)
+select id_photo, count(id_photo) as 'compte' from tbl_vote_photo group by id_photo order by compte DESC limit 10;
+
+select tbl_photo.*, count from tbl_photo inner join tempo on tempo.id_photo = tbl_photo.id_photo;
+
+drop temporary table tempo;
+end|

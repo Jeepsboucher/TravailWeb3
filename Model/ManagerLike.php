@@ -95,6 +95,14 @@ class ManagerLike extends Connexion
         $resultat->execute();
         return $resultat;
     }
+    
+    public function ObtenirListeDesPlusAimees()
+    {
+        $sql = 'call ObtenirListeDesPlusAimees()';
+        $resultat = self::getConnexion()->prepare($sql);
+        $resultat->execute();
+        return $resultat;
+    }
 }
 
 ?>

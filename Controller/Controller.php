@@ -30,6 +30,8 @@
 
     function Authentification()
     {
+        $ManagerMenuPrincipal = new ManagerLike;
+        $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees();
         $_SESSION['echecinscription'] = '0';
         require 'View/Home.php';
     }
@@ -41,7 +43,7 @@
 
     function AfficherMenuPrincipal(){	
         $ManagerMenuPrincipal = new ManagerLike;
-        $resultatMenu = $ManagerMenuPrincipal
+        $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees();
 		require 'View/Home.php';
 	}
 
