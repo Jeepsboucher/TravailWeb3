@@ -89,7 +89,7 @@ values('Le plus étrange'),
 ('Le plus gros');
 
 Insert into tbl_pays(nom)
-values('Austria'),
+values
 ('Afghanistan'),
 ('Albania'),
 ('Algeria'),

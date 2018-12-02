@@ -1,6 +1,6 @@
 <?php
-    require("MainMenu.php");
     include 'SessionValide.php';
+    require("MainMenu.php");
 ?>
 
 <html>

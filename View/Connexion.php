@@ -1,9 +1,9 @@
 <?php 
+    include 'SessionValide.php';
     if(isset($_SESSION['echecinscription'])){
             echo 'session : ' . $_SESSION['echecinscription'];
         if($_SESSION['echecinscription'] == 1)
         {
-            echo 'il entre';
             ?>
               <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
             <script type="text/javascript">

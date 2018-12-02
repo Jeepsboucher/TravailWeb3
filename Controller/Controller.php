@@ -73,6 +73,7 @@
             {
                 $resultat = $ManagerLike->GetUserId($nomUtilisateur);
                 $userID = $resultat->fetch();
+                session_start();
                 $_SESSION['id'] = ($userID['id_participant']);
                 $_SESSION['nomUtilisateur'] = $nomUtilisateur;
                 $_SESSION['etat'] = 'connecte';
