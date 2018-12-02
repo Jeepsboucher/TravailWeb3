@@ -1,0 +1,17 @@
++ etrange = liban
++ beau = sakura
++ coloré = érable
++ beau = sapin
++ etrange = axel
++ etrange = baobab
++ coloré = feuilles bleues
++ coloré = tronc bleu
++ petit = bonzai
++ etrange = cactus
++ etrange = cedre pleureur
++ etrange = dragonnnier
++ gros = eucalyptus
++ beau = palmier
++ coloré = pechier
++ gros = peuplier
++ colore = pommier

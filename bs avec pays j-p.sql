@@ -86,7 +86,9 @@ values('Jean-Philippe Boucher','Jeepsboucher','12345','jeeps_boucher@hotmail.com
 Insert into tbl_categorie(nom)
 values('Le plus étrange'),
 ('Le plus beau'),
-('Le plus gros');
+('Le plus gros'),
+('Le plus coloré'),
+('Le plus petit');
 
 Insert into tbl_pays(nom)
 values
@@ -309,3 +311,46 @@ values
 ('Yemen'),
 ('Zambia'),
 ('Zimbabwe');
+
+insert into tbl_photo (path, description, id_participant, id_pays, id_categorie)
+values ('photo/2018-12-02 16-58-14.jpg', 'Flat and big', '4', '110', '1'),
+('photo/2018-12-02 16-58-58.jpg', 'Beau et printanier', '4', '95', '2'),
+('photo/2018-12-02 16-59-17.jpg', 'Donne du sirop', '4', '35', '4'),
+('photo/2018-12-02 17-00-45.jpg', 'Pour noel', '4', '35', '2'),
+('photo/2018-12-02 17-01-04.jpg', 'troue', '4', '13', '1'),
+('photo/2018-12-02 17-01-30.jpg', 'grand et etroit', '4', '1', '1'),
+('photo/2018-12-02 17-02-04.jpg', 'bleute', '4', '3', '4'),
+('photo/2018-12-02 17-02-19.jpg', 'tronc bleu', '4', '17', '4'),
+('photo/2018-12-02 17-02-37.jpg', 'court et elegant', '4', '95', '5'),
+('photo/2018-12-02 17-03-03.jpg', 'piquant', '4', '180', '1'),
+('photo/2018-12-02 17-03-14.jpg', 'pleur', '4', '14', '1'),
+('photo/2018-12-02 17-03-40.jpg', 'large', '4', '7', '1'),
+('photo/2018-12-02 17-04-00.jpg', 'lonononong', '4', '8', '3'),
+('photo/2018-12-02 17-04-23.jpg', 'ete', '4', '9', '2'),
+('photo/2018-12-02 17-04-48.jpg', 'donne des peches', '4', '9', '4'),
+('photo/2018-12-02 17-05-06.jpg', 'long et etroit', '4', '35', '3'),
+('photo/2018-12-02 17-06-52.jpg', 'donne des pommes', '4', '35', '4');
+
+insert into tbl_vote_photo(date_vote,id_participant,id_photo)
+values ('2018-12-02','1','1'),
+('2018-12-02','2','1'),
+('2018-12-02','3','1'),
+('2018-12-02','4','1'),
+('2018-12-02','1','2'),
+('2018-12-02','2','2'),
+('2018-12-02','1','3'),
+('2018-12-02','1','4'),
+('2018-12-02','1','5'),
+('2018-12-02','1','6'),
+('2018-12-02','2','6'),
+('2018-12-02','3','6'),
+('2018-12-02','4','6');
+
+CREATE PROCEDURE listePhotosSelonFavoris()
+BEGIN
+	SELECT COUNT(*) tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    FROM tbl_photo
+    INNER JOIN tbl_vote_photo
+    ON tbl_vote_photo.id_photo = tbl_photo.id_photo
+    ORDER BY tbl_vote_photo.
+END

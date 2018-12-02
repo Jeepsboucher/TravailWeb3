@@ -1,7 +1,5 @@
 <?php
     include 'SessionValide.php';
-    echo $_SESSION['id'];
-    
     require('MainMenu.php');
 ?>
 
@@ -22,7 +20,7 @@
     </head>
     
     <body>                   
-        <form class="pure-form pure-form-aligned" id="ajoutPhoto" name="ajoutPhoto" method="Post" action="#" type="actionForm" enctype="multipart/form-data">
+        <form class="pure-form pure-form-aligned" id="ajoutPhoto" name="ajoutPhoto" method="Post" action="index.php?action=UploadPhoto" type="actionForm" enctype="multipart/form-data">
         <div class="pure-g">
             <div class="pure-u-1-6 pure-u-md-1-6 pure-u-lg-1-6">
             </div>

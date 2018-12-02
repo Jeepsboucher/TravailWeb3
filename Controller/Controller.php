@@ -59,6 +59,8 @@
     {
         $ManagerCategorie = new ManagerLike;
         $resultatCategorie = $ManagerCategorie->ObtenirCategoriePhoto();
+        $ManagerPhotos = new ManagerLike;
+        $resultatPhotos = $ManagerPhotos->ObtenirPhotos();
         require 'View/Explorer.php';
     }
 
@@ -72,8 +74,8 @@
             $ManagerLike = new ManagerLike;
             $resultatConnexion = $ManagerLike->checkIfUserCanConnect($nomUtilisateur,$motDePasse);
             
-            $donnees = $resultatConnexion->fetchAll(PDO::FETCH_COLUMN, 0); 
-            $usagerExistant = $donnees;
+            $donnees = $resultatConnexion->fetchAll(); 
+            $usagerExistant = ($donnees[0]['MyCount'] == 1);
             if ($usagerExistant)
             {
                 $resultat = $ManagerLike->GetUserId($nomUtilisateur);
@@ -120,6 +122,13 @@
     function Inscription($nomComplet,$nomUtilisateur,$motDePasse,$courriel){
         $ManagerInscription = new ManagerLike;
         $resultatInscription = $ManagerInscription->createUser($nomComplet,$nomUtilisateur,$motDePasse,$courriel);
+        
+        $resultat = $ManagerInscription->GetUserId($nomUtilisateur);
+        $userID = $resultat->fetch();
+        session_start();
+        $_SESSION['id'] = ($userID['id_participant']);
+        $_SESSION['nomUtilisateur'] = $nomUtilisateur;
+        $_SESSION['etat'] = 'connecte';
         Authentification();
     }
 
