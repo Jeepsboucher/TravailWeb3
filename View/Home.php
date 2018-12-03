@@ -13,6 +13,8 @@
         <link href="jquery-ui.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="CSS/Design.css">
         <link rel="stylesheet" type="text/css" href="CSS/ImageModal.css">
+                <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
         <![endif]-->
@@ -80,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="pure-u-3-24 pure-u-md-3-24 pure-u-lg-3-24 form-box">
+                    <div class="pure-u-3-24 pure-u-md-3-24 pure-u-lg-5-24 form-box">
                         <h2>Favoris:</h2>
                         <br>
 
@@ -89,15 +91,18 @@
                            <center>
                                <br>
                                 <div class="pure-u-1">
-                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Mexique!" style="width:100px;height:auto;">
+                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;"
+                                    onclick="modal(this)">
                                 </div>
                                 <br>
                                 <div style="">
-                                    <img class="pure-img" src="Images/castle1.jpg" title="Plat national du Mexique!" style="width:100px;height:auto;">
+                                    <img class="pure-img" src="Images/castle1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;"
+                                    onclick="modal(this)">
                                  </div>
                                  <br>
                                 <div style="">
-                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Québec!" style="width:100px;height:auto;">
+                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Québec!" style="width:auto;height:auto;max-width:300px;"
+                                    onclick="modal(this)">
                                 </div>
                                 <br>
                             </center>
