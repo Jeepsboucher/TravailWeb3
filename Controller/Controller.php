@@ -67,7 +67,12 @@
     function AfficherExplorerPhotos($categorie)
     {
         $ManagerPhotos = new ManagerLike();
-        $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategoris($categorie);
+        if ($categorie == 0){
+            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotos();
+        }
+        else {
+            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategoris($categorie);
+        }
         require 'View/Vue_ExplorerPhotos.php';
     }
     

@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/Design.css">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="CSS/ImageModal.css">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <script lang="Javascript">
@@ -38,6 +39,6 @@
         </div>
         
         <script <?php echo $lien_ajax ?>></script>
-        <script <?php echo $gestion_ajax ?> ></script>	
+        <script <?php echo $gestion_ajax ?> ></script>
     </body>
 </html>

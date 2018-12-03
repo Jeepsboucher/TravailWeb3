@@ -1,9 +1,6 @@
 <?php
     include 'SessionValide.php';
     require("MainMenu.php");
-    echo $_SESSION['etat'];
-    echo $_SESSION['nomUtilisateur'];
-    echo $_SESSION['id'];
 ?>
 
 <html>
@@ -66,12 +63,12 @@
                            <?php while ($donnees = $resultatLesPlusAimees->fetch()) {    
                                 ?>
                                 <div class="pure-u-1-4 pure-u-md-1-1 pure-u-lg-1-4" id="1" style="vertical-align:middle;text-align:center;">
-                                    <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" style="width:auto;height:auto;max-width:300px;curso:pointer" onclick="modal(this)"
+                                    <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" style="width:auto;height:auto;max-width:300px;cursor:pointer" onclick="modal(this)"
                                     class="modal-hover-opacity">
                                     
                                      <div onclick="AddToFavorites('img<?php echo $donnees['id_photo']?>')">
-                                         <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;">favorite_border</i>
-                                         <label><?php echo $donnees['count']?></label>
+                                         <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;position:relative;top:2px;">favorite_border</i>
+                                         <label style="vertical-align:middle;position:relative;top:-5px;"><?php echo $donnees['count']?></label>
                                      </div>
                                 </div>
                                 <?php
@@ -91,18 +88,27 @@
                            <center>
                                <br>
                                 <div class="pure-u-1">
-                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;"
-                                    onclick="modal(this)">
+                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;" onclick="modal(this)">
+                                    <div onclick="AddToFavorites('fav1')">
+                                        <i id="fav1" class="material-icons" style="cursor:pointer;position:relative;top:2px;">favorite_border</i>
+                                        <label style="vertical-align:middle;position:relative;top:-5px;">2</label>
+                                    </div>
                                 </div>
                                 <br>
                                 <div style="">
-                                    <img class="pure-img" src="Images/castle1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;"
-                                    onclick="modal(this)">
+                                    <img class="pure-img" src="Images/castle1.jpg" title="Plat national du Mexique!" style="width:auto;height:auto;max-width:300px;" onclick="modal(this)">
+                                    <div onclick="AddToFavorites('fav2')">
+                                        <i id="fav2" class="material-icons" style="cursor:pointer;position:relative;top:2px;">favorite_border</i>
+                                        <label style="vertical-align:middle;position:relative;top:-5px;">4</label>
+                                    </div>
                                  </div>
                                  <br>
                                 <div style="">
-                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Québec!" style="width:auto;height:auto;max-width:300px;"
-                                    onclick="modal(this)">
+                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du QuÃ©bec!" style="width:auto;height:auto;max-width:300px;" onclick="modal(this)">
+                                    <div onclick="AddToFavorites('fav3')">
+                                        <i id="fav3" class="material-icons" style="cursor:pointer;position:relative;top:2px;">favorite_border</i>
+                                        <label style="vertical-align:middle;position:relative;top:-5px;">17</label>
+                                    </div>
                                 </div>
                                 <br>
                             </center>
