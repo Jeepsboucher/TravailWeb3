@@ -30,17 +30,16 @@
             ?>
             <div class="pure-g">
                 <div class="pure-u-1 pure-u-md-1-3 pure-u-lg-1-3">
-                    <img class="pure-img" src="Images/yellowish.jpg">
                 </div>
             </div>
             <div class="pure-u-1 pure-u-md-1 pure-u-lg-1 form-box" style="left:100px;position:fixed;">
                 <div class="pure-u-1 pure-u-md-14-24 pure-u-lg-14-24" style="background-color:#f2f2f2;height:500px;">
-                    <p>GAHGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
+                    <p>&nbsp; PAR ALICE ET JEAN-PHILIPPE</p>
                 </div>
                 <div class="pure-u-1 pure-u-md-1-24 pure-u-lg-1-24">
                 </div>
                 <div class="pure-u-1 pure-u-md-6-24 pure-u-lg-6-24" style="background-color:#dbad5f;height:300px;">
-                    <p>GAHGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</p>
+                    <p>&nbsp; ok????</p>
                 </div>
             </div>
         </form>

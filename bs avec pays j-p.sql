@@ -419,7 +419,7 @@ BEGIN
     
     SELECT Favoris.nombreFavoris, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
-    INNER JOIN tbl_vote_photo
+    LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
     LEFT JOIN Favoris
     ON tbl_photo.id_photo = Favoris.id_photo
