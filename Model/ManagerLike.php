@@ -53,6 +53,14 @@ class ManagerLike extends Connexion
     $resultat-> execute();
     }
     
+    public function findVote($id_participant, $id_photo){
+    $sql = 'select * from tbl_vote_photo where id_participant = :id_participant and id_photo = :id_photo';
+    $resultat = self::getConnexion()->prepare($sql);
+    $resultat->bindParam('id_participant', $id_participant, PDO::PARAM_INT);
+    $resultat->bindParam('id_photo', $id_photo, PDO::PARAM_INT);
+    $resultat-> execute();
+    }
+    
     public function addVote($id_participant, $id_photo){
     $date = date("Y-m-d H:i:s", strtotime($date));
     $sql = 'insert into tbl_vote_photo (date_vote,id_participant,id_photo)
@@ -60,7 +68,7 @@ class ManagerLike extends Connexion
     $resultat = self::getConnexion()->prepare($sql);
     $resultat->bindParam('date', $date, PDO::PARAM_STR);
     $resultat->bindParam('id_participant', $id_participant, PDO::PARAM_INT);
-    $resultat->bindParam('password', $id_photo, PDO::PARAM_INT);
+    $resultat->bindParam('id_photo', $id_photo, PDO::PARAM_INT);
     $resultat-> execute();
     }
     
@@ -68,7 +76,7 @@ class ManagerLike extends Connexion
     $sql = 'delete from tbl_vote_photo where id_participant = :id_participant and id_photo = :id_photo';
     $resultat = self::getConnexion()->prepare($sql);
     $resultat->bindParam('id_participant', $id_participant, PDO::PARAM_INT);
-    $resultat->bindParam('password', $id_photo, PDO::PARAM_INT);
+    $resultat->bindParam('id_photo', $id_photo, PDO::PARAM_INT);
     $resultat-> execute();
     }
     
@@ -80,7 +88,7 @@ class ManagerLike extends Connexion
         return $resultat;
     }
     
-    public function ObtenirPhotosSelonCategoris($categorie)
+    public function ObtenirPhotosSelonCategories($categorie)
     {
         $sql = 'CALL listePhotosSelonCategorie(:categorie)';
         $resultat = self::getConnexion()->prepare($sql);

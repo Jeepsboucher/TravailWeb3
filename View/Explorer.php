@@ -6,6 +6,7 @@
     $gestion_ajax='type="text/JavaScript" src="JS/Gestion_ExplorerPhotos.js"';
 ?>
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
 <?php ob_start(); ?>
 
 <form name="Contenu" class="pure-form pure-form-aligned">

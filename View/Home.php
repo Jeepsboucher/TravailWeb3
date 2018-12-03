@@ -104,7 +104,7 @@
                                  </div>
                                  <br>
                                 <div style="">
-                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du QuÃ©bec!" style="width:auto;height:auto;max-width:300px;" onclick="modal(this)">
+                                    <img class="pure-img" src="Images/beach1.jpg" title="Plat national du Québec!" style="width:auto;height:auto;max-width:300px;" onclick="modal(this)">
                                     <div onclick="AddToFavorites('fav3')">
                                         <i id="fav3" class="material-icons" style="cursor:pointer;position:relative;top:2px;">favorite_border</i>
                                         <label style="vertical-align:middle;position:relative;top:-5px;">17</label>

@@ -11,17 +11,20 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <script lang="Javascript">
-            function AddToFavorites(iconId)
+            /*function AddToFavorites(iconId)
             {
                 if (document.getElementById(iconId).innerHTML == "favorite_border")
                 {
+                    //liker
                     document.getElementById(iconId).innerHTML = "favorite";
+                    
                 }
                 else
                 {
+                    //déliker
                     document.getElementById(iconId).innerHTML = "favorite_border";
                 }   
-            }
+            }*/
         </script>
     </head>
     

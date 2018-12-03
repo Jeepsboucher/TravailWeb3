@@ -71,11 +71,27 @@
             $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotos();
         }
         else {
-            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategoris($categorie);
+            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategories($categorie);
         }
         require 'View/Vue_ExplorerPhotos.php';
     }
-    
+
+    function FaireUnVote($id_participant,$id_photo)
+    {
+        $ManagerVote = new ManagerLike;
+        $resultatRecherche = $ManagerVote->findVote($id_participant, $id_photo);
+        $donnees = $resultatRecherche->fetchAll(); 
+        $voteExistant = ($donnees[0]['MyCount'] == 1);
+        if ($voteExistant)
+        {
+            $resultatVote = $ManagerVote->deleteVote($id_participant, $id_photo)
+        }
+        else
+        {
+            $resultatVote = $ManagerVote->addVote($id_participant, $id_photo)
+        } 
+        require 'View/Vue_AfficherVotes.php';
+    }
 
     function AfficherFAQ()
     {
