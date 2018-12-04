@@ -28,23 +28,21 @@
         require 'View/Connexion.php';
     }
 
-    function Authentification()
-    {
-        $ManagerMenuPrincipal = new ManagerLike;
-        $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees();
-        $_SESSION['echecinscription'] = '0';
-        require 'View/Home.php';
-    }
-
     function EchecInscription()
     {
          require 'View/Connexion.php';
     }
 
-    function AfficherMenuPrincipal(){	
+    function AfficherMenuPrincipal()
+    {	
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id_participant = $_SESSION['id'];
         $ManagerMenuPrincipal = new ManagerLike;
-        $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees();
+        $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees($id_participant);
 		require 'View/Home.php';
+        require 'View/Vue_HomePhotosFavoris.php';
 	}
 
     function AfficherRenseignements()
@@ -57,6 +55,39 @@
         require 'View/Favoris.php';
     }
 
+    function AfficherHomePhotosFavoris()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id_participant = $_SESSION['id'];
+        $ManagerPhotos = new ManagerLike();
+        $resultatLesPlusAimees = $ManagerPhotos->ObtenirListeDesPlusAimees($id_participant);
+        $resultatFavoris = $ManagerPhotos->ObtenirTroisDerniersFavoris($id_participant);
+        require 'View/Vue_HomePhotosFavoris.php';
+    }
+
+    function GestionVoteHome($id_photo)
+    {
+        session_start();
+        $id_participant = $_SESSION['id'];
+        FaireUnVoteHome($id_participant,$id_photo);
+    }
+
+    function FaireUnVoteHome($id_participant,$id_photo)
+    {
+        $ManagerVote = new ManagerLike;
+        $resultatRecherche = $ManagerVote->findVote($id_participant, $id_photo);
+        if ($resultatRecherche){
+            $resultatVote = $ManagerVote->deleteVote($id_participant, $id_photo);
+        }
+        else {
+            $resultatVote = $ManagerVote->addVote($id_participant, $id_photo);
+        } 
+        AfficherHomePhotosFavoris();
+        
+    }
+
     function AfficherExplorerCategories()
     {
         $ManagerCategorie = new ManagerLike;
@@ -66,31 +97,39 @@
 
     function AfficherExplorerPhotos($categorie)
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id_participant = $_SESSION['id'];
         $ManagerPhotos = new ManagerLike();
         if ($categorie == 0){
-            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotos();
+            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotos($id_participant);
         }
         else {
-            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategories($categorie);
+            $resultatPhotosTriees = $ManagerPhotos->ObtenirPhotosSelonCategories($categorie,$id_participant);
         }
         require 'View/Vue_ExplorerPhotos.php';
     }
 
-    function FaireUnVote($id_participant,$id_photo)
+    function GestionVote($id_photo,$categorie)
+    {
+        session_start();
+        $id_participant = $_SESSION['id'];
+        FaireUnVote($id_participant,$id_photo,$categorie);
+    }
+
+    function FaireUnVote($id_participant,$id_photo,$categorie)
     {
         $ManagerVote = new ManagerLike;
         $resultatRecherche = $ManagerVote->findVote($id_participant, $id_photo);
-        $donnees = $resultatRecherche->fetchAll(); 
-        $voteExistant = ($donnees[0]['MyCount'] == 1);
-        if ($voteExistant)
-        {
-            $resultatVote = $ManagerVote->deleteVote($id_participant, $id_photo)
+        if ($resultatRecherche){
+            $resultatVote = $ManagerVote->deleteVote($id_participant, $id_photo);
         }
-        else
-        {
-            $resultatVote = $ManagerVote->addVote($id_participant, $id_photo)
+        else {
+            $resultatVote = $ManagerVote->addVote($id_participant, $id_photo);
         } 
-        require 'View/Vue_AfficherVotes.php';
+        AfficherExplorerPhotos($categorie);
+        
     }
 
     function AfficherFAQ()
@@ -113,7 +152,7 @@
                 $_SESSION['id'] = ($userID['id_participant']);
                 $_SESSION['nomUtilisateur'] = $nomUtilisateur;
                 $_SESSION['etat'] = 'connecte';
-                Authentification();  
+                AfficherMenuPrincipal();
             }
             else
             {

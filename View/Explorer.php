@@ -34,8 +34,6 @@
     <br>
     <br>
 
-    <!-- AFFICHER LES PHOTOS EN ORDRE DE J'AIME,  SELON UNE CATÉGORIE SI DÉSIRÉ -->
-    <!-- Pour retourner le code généré par Ajax --> 
     <div name="content" id="photos" style="background-color:#f2f2f2;">
         <br>
         <div id="liste_des_photos"></div>

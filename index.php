@@ -41,6 +41,17 @@ try {
         else if ( !empty($_POST['nomCompletIns']) && !empty($_POST['nomUtilisateurIns']) && !empty($_POST['motDePasseIns']) && !empty($_POST['motDePasseValidation']) && !empty($_POST['courrielIns']) ){
             ValiderInscription(htmlentities($_POST['nomCompletIns']),htmlentities($_POST['nomUtilisateurIns']),htmlentities($_POST['motDePasseIns']),htmlentities($_POST['motDePasseValidation']),htmlentities($_POST['courrielIns']));
         }
+        else if (isset($_POST['id_photo'])){
+            if(isset($_POST['id_categorie'])){
+                GestionVote(htmlentities($_POST['id_photo']),$_POST['id_categorie']);
+            }
+            else if(isset($_POST['home'])){
+                GestionVoteHome(htmlentities($_POST['id_photo']));
+            }
+            else {
+                GestionVote(htmlentities($_POST['id_photo']),0);
+            }
+        }
         else if (isset($_POST['id_categorie'])){
                 AfficherExplorerPhotos(htmlentities($_POST['id_categorie']));
         }

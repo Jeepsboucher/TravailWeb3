@@ -362,70 +362,143 @@ values ('2018-12-02','1','1'),
 
 drop procedure if exists ObtenirListeDesPlusAimees;
 delimiter |
-create procedure ObtenirListeDesPlusAimees()
+create procedure ObtenirListeDesPlusAimees(IN vIdParticipant INT)
 begin
 
-create temporary table tempo(
-        id_photo   Int   NOT NULL,
-        count   Int   NOT NULL
-);
+	create temporary table Tempo(
+			id_photo   Int   NOT NULL,
+			count   Int   NOT NULL
+	);
 
-insert into tempo (id_photo,count)
-select id_photo, count(id_photo) as 'compte' from tbl_vote_photo group by id_photo order by compte DESC limit 10;
+	CREATE TEMPORARY TABLE VoteUsager(
+		id_photo  INT,
+		bool_vote INT
+	);
 
-select tbl_photo.*, count from tbl_photo inner join tempo on tempo.id_photo = tbl_photo.id_photo;
+	insert into Tempo (id_photo,count)
+	select id_photo, count(id_photo) as 'compte' from tbl_vote_photo group by id_photo order by compte DESC limit 10;
+    
+	INSERT INTO VoteUsager(id_photo, bool_vote)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'vote' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    WHERE tbl_vote_photo.id_participant = vIdParticipant
+    group by id_photo 
+    order by vote DESC;
 
-drop temporary table tempo;
+	select VoteUsager.bool_vote, tbl_photo.*, count 
+    from tbl_photo 
+    inner join tempo 
+    on tempo.id_photo = tbl_photo.id_photo
+	LEFT JOIN VoteUsager
+    ON tbl_photo.id_photo = VoteUsager.id_photo;
+
+	drop temporary table Tempo;
+    drop temporary table VoteUsager;
 end|
 
 DELIMITER | 
 
-CREATE PROCEDURE listePhotosSelonCategorie(IN vcodeCategorie INT)
+CREATE PROCEDURE listePhotosSelonCategorie(IN vcodeCategorie INT, vIdParticipant INT)
 BEGIN
 	CREATE TEMPORARY TABLE Favoris(
 		id_photo       INT,
 		nombreFavoris  INT
     );
+    
+	CREATE TEMPORARY TABLE VoteUsager(
+		id_photo  INT,
+		bool_vote INT
+    );
 
 	INSERT INTO Favoris(id_photo, nombreFavoris)
-	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' from tbl_vote_photo RIGHT JOIN tbl_photo ON tbl_photo.id_photo = tbl_vote_photo.id_photo group by id_photo order by compte DESC;
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    group by id_photo 
+    order by compte DESC;
     
-    SELECT Favoris.nombreFavoris, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+	INSERT INTO VoteUsager(id_photo, bool_vote)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'vote' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    WHERE tbl_vote_photo.id_participant = vIdParticipant
+    group by id_photo 
+    order by vote DESC;
+    
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
     LEFT JOIN Favoris
     ON tbl_photo.id_photo = Favoris.id_photo
+	LEFT JOIN VoteUsager
+    ON tbl_photo.id_photo = VoteUsager.id_photo
     WHERE id_categorie = vcodeCategorie
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC;
     
   DROP TEMPORARY TABLE Favoris;
+  DROP TEMPORARY TABLE VoteUsager;
   
 END |
 
 
 DELIMITER | 
 
-CREATE PROCEDURE listePhotos()
+CREATE PROCEDURE listePhotos(IN vIdParticipant INT)
 BEGIN
 	CREATE TEMPORARY TABLE Favoris(
-		id_photo       INT,
-		nombreFavoris  INT
+		id_photo      INT,
+		nombreFavoris INT
+    );
+    
+	CREATE TEMPORARY TABLE VoteUsager(
+		id_photo  INT,
+		bool_vote INT
     );
 
 	INSERT INTO Favoris(id_photo, nombreFavoris)
-	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' from tbl_vote_photo RIGHT JOIN tbl_photo ON tbl_photo.id_photo = tbl_vote_photo.id_photo group by id_photo order by compte DESC;
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    group by id_photo 
+    order by compte DESC;
     
-    SELECT Favoris.nombreFavoris, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    INSERT INTO VoteUsager(id_photo, bool_vote)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'vote' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    WHERE tbl_vote_photo.id_participant = vIdParticipant
+    group by id_photo 
+    order by vote DESC;
+    
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
     LEFT JOIN Favoris
     ON tbl_photo.id_photo = Favoris.id_photo
+	LEFT JOIN VoteUsager
+    ON tbl_photo.id_photo = VoteUsager.id_photo
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC;
     
   DROP TEMPORARY TABLE Favoris;
+  DROP TEMPORARY TABLE VoteUsager;
+  
+END |
+
+
+DELIMITER | 
+
+CREATE PROCEDURE ObtenirTroisDerniersFavoris(IN vIdParticipant INT)
+BEGIN
+
   
 END |

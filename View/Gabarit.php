@@ -5,27 +5,10 @@
         <title><?php echo $titre ?></title>
         <link href="jquery-ui.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="CSS/Design.css">
+        <link rel="stylesheet" type="text/css" href="CSS/ImageModal.css">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="CSS/ImageModal.css">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script lang="Javascript">
-            /*function AddToFavorites(iconId)
-            {
-                if (document.getElementById(iconId).innerHTML == "favorite_border")
-                {
-                    //liker
-                    document.getElementById(iconId).innerHTML = "favorite";
-                    
-                }
-                else
-                {
-                    //déliker
-                    document.getElementById(iconId).innerHTML = "favorite_border";
-                }   
-            }*/
-        </script>
     </head>
     
     <body scroll="yes">
@@ -35,9 +18,6 @@
             </div>
             <div class="pure-u-21-24 pure-u-md-21-24 pure-u-lg-21-24 form-box">
                 <?php echo $contenu ?>
-            
-            
-    
             </div>
         </div>
         
