@@ -67,7 +67,7 @@ CREATE TABLE tbl_photo(
 
 CREATE TABLE tbl_vote_photo(
         id_vote_photo  Int  Auto_increment  NOT NULL ,
-        date_vote      Date NOT NULL ,
+        date_vote      Datetime NOT NULL ,
         id_participant Int NOT NULL ,
         id_photo       Int NOT NULL
 	,CONSTRAINT tbl_vote_photo_PK PRIMARY KEY (id_vote_photo)
@@ -332,23 +332,24 @@ values ('photo/2018-12-02 16-58-14.jpg', 'Flat and big', '4', '110', '1'),
 ('photo/2018-12-02 17-06-52.jpg', 'donne des pommes', '4', '35', '4');
 
 insert into tbl_vote_photo(date_vote,id_participant,id_photo)
-values ('2018-12-02','1','1'),
-('2018-12-02','2','1'),
+values ('2018-12-02 16:24','1','1'),
+('2018-12-02 16:21','2','1'),
 ('2018-12-02','3','1'),
-('2018-12-02','4','1'),
+('2018-12-02 17:21','4','1'),
 ('2018-12-02','1','2'),
 ('2018-12-02','2','2'),
 ('2018-12-02','3','2'),
 ('2018-12-02','1','3'),
 ('2018-12-02','2','3'),
-('2018-12-02','4','2'),
+('2018-12-02 17:23','4','2'),
 ('2018-12-02','1','4'),
 ('2018-12-02','2','4'),
 ('2018-12-02','1','5'),
 ('2018-12-02','2','5'),
 ('2018-12-02','1','6'),
 ('2018-12-02','2','6'),
-('2018-12-02','4','6'),
+('2018-12-02 17:25','4','6'),
+('2018-12-02 17:28','4','7'),
 ('2018-12-02','1','7'),
 ('2018-12-02','2','7'),
 ('2018-12-02','1','8'),
@@ -500,5 +501,47 @@ DELIMITER |
 CREATE PROCEDURE ObtenirTroisDerniersFavoris(IN vIdParticipant INT)
 BEGIN
 
+	CREATE TEMPORARY TABLE Favoris(
+		id_photo      INT,
+		nombreFavoris INT
+    );
+    
+	CREATE TEMPORARY TABLE VoteUsager(
+		id_photo  INT,
+		bool_vote INT
+    );
+    
+	INSERT INTO Favoris(id_photo, nombreFavoris)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    group by id_photo 
+    order by compte DESC;
+    
+    INSERT INTO VoteUsager(id_photo, bool_vote)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'vote' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    WHERE tbl_vote_photo.id_participant = vIdParticipant
+    group by id_photo 
+    order by vote DESC;
+
+    SELECT tbl_vote_photo.date_vote, Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    FROM tbl_photo
+    LEFT JOIN tbl_vote_photo
+    ON tbl_vote_photo.id_photo = tbl_photo.id_photo
+    LEFT JOIN Favoris
+    ON tbl_photo.id_photo = Favoris.id_photo
+	LEFT JOIN VoteUsager
+    ON tbl_photo.id_photo = VoteUsager.id_photo
+    WHERE bool_vote = 1
+    GROUP BY tbl_photo.id_photo
+    ORDER BY date_vote DESC
+    limit 3;
+
+	DROP TEMPORARY TABLE Favoris;
+	DROP TEMPORARY TABLE VoteUsager;
   
 END |
