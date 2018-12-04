@@ -42,7 +42,6 @@
         $ManagerMenuPrincipal = new ManagerLike;
         $resultatLesPlusAimees = $ManagerMenuPrincipal->ObtenirListeDesPlusAimees($id_participant);
 		require 'View/Home.php';
-        AfficherHomePhotosFavoris();
 	}
 
     function AfficherRenseignements()

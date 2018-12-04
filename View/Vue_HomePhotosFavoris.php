@@ -24,7 +24,7 @@
                             }
                         ?>
                      </i>
-                     <label style="vertical-align:middle;position:relative;top:-5px;"><?php echo $donnees['count']?></label>
+                     <label style="vertical-align:middle;position:relative;top:-5px;"><?php echo $donnees['nombreFavoris']?></label>
                  </div>
             </div>
             <?php

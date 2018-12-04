@@ -368,21 +368,25 @@ drop procedure if exists ObtenirListeDesPlusAimees;
 delimiter |
 create procedure ObtenirListeDesPlusAimees(IN vIdParticipant INT)
 begin
-
-	create temporary table Tempo(
-			id_photo   Int   NOT NULL,
-			count   Int   NOT NULL
-	);
-
+	CREATE TEMPORARY TABLE Favoris(
+		id_photo      INT,
+		nombreFavoris INT
+    );
+    
 	CREATE TEMPORARY TABLE VoteUsager(
 		id_photo  INT,
 		bool_vote INT
-	);
+    );
 
-	insert into Tempo (id_photo,count)
-	select id_photo, count(id_photo) as 'compte' from tbl_vote_photo group by id_photo order by compte DESC limit 10;
+	INSERT INTO Favoris(id_photo, nombreFavoris)
+	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'compte' 
+    from tbl_vote_photo 
+    RIGHT JOIN tbl_photo 
+    ON tbl_photo.id_photo = tbl_vote_photo.id_photo 
+    group by id_photo 
+    order by compte DESC;
     
-	INSERT INTO VoteUsager(id_photo, bool_vote)
+    INSERT INTO VoteUsager(id_photo, bool_vote)
 	SELECT tbl_photo.id_photo, count(tbl_vote_photo.id_photo) as 'vote' 
     from tbl_vote_photo 
     RIGHT JOIN tbl_photo 
@@ -390,16 +394,21 @@ begin
     WHERE tbl_vote_photo.id_participant = vIdParticipant
     group by id_photo 
     order by vote DESC;
-
-	select VoteUsager.bool_vote, tbl_photo.*, count 
-    from tbl_photo 
-    inner join tempo 
-    on tempo.id_photo = tbl_photo.id_photo
+    
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    FROM tbl_photo
+    LEFT JOIN tbl_vote_photo
+    ON tbl_vote_photo.id_photo = tbl_photo.id_photo
+    LEFT JOIN Favoris
+    ON tbl_photo.id_photo = Favoris.id_photo
 	LEFT JOIN VoteUsager
-    ON tbl_photo.id_photo = VoteUsager.id_photo;
-
-	drop temporary table Tempo;
-    drop temporary table VoteUsager;
+    ON tbl_photo.id_photo = VoteUsager.id_photo
+    GROUP BY tbl_photo.id_photo
+    ORDER BY NombreFavoris DESC
+    LIMIT 10;
+    
+  DROP TEMPORARY TABLE Favoris;
+  DROP TEMPORARY TABLE VoteUsager;
 end|
 
 DELIMITER | 

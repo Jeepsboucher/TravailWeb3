@@ -48,13 +48,13 @@ try {
             else if(isset($_POST['home'])){
                 GestionVoteHome(htmlentities($_POST['id_photo']));
             }
-            else {
-                GestionVote(htmlentities($_POST['id_photo']),0);
-            }
         }
         else if (isset($_POST['id_categorie'])){
                 AfficherExplorerPhotos(htmlentities($_POST['id_categorie']));
         }
+        else if(isset($_POST['homeVue'])){
+                AfficherHomePhotosFavoris();
+            }
         else {
             Connexion();
         }
