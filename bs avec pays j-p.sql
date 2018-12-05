@@ -454,7 +454,7 @@ BEGIN
     ON tbl_photo.id_photo = VoteUsager.id_photo
     LEFT JOIN tbl_pays
     ON tbl_pays.id_pays = tbl_photo.id_pays
-    WHERE id_categorie = '1'
+    WHERE id_categorie = vcodeCategorie
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC;
     

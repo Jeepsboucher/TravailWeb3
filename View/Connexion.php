@@ -65,7 +65,7 @@
     }
     </script>
 </head>
-<body background="Images/lake.jpg" style="background-repeat:no-repeat;background-size:cover;">
+<body background="Images/lake.jpg" style="background-repeat:no-repeat;background-size:cover;min-width:500px">
     <form name="Connexion" method="POST" action="index.php">
         <div>
             <div class="pure-u-1 pure-u-md-3-3 pure-u-lg-5-5">
@@ -122,12 +122,13 @@
                                <input type="text" class="pure-input-1-2" id="nomUtilisateurIns" name="nomUtilisateurIns"/>
                                <br><br>
                                <label class="pure-input-1-2" for="motDePasseIns">Mot de passe: </label>
-                               <input type="text" class="pure-input-1-2" id="motDePasseIns" name="motDePasseIns"/>
+                               <input type="password" class="pure-input-1-2" id="motDePasseIns" name="motDePasseIns"/>
                                <br><br>
                                <label class="pure-input-1-2" for="motDePasseValidation">Validation du mot de passe: </label>
-                               <input type="text" class="pure-input-1-2" id="motDePasseValidation" name="motDePasseValidation"/>
+                               <input type="password" class="pure-input-1-2" id="motDePasseValidation" name="motDePasseValidation"/>
                                <br><br>
                                <label class="pure-input-1-2" for="courrielIns">Courriel: </label>
+                               <br>
                                <input type="text" class="pure-input-1-2" id="courrielIns" name="courrielIns"/>
                                <br><br><br>
                                <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">S'inscrire</button>
@@ -142,9 +143,9 @@
                                <input type="text" class="pure-input-1-2" id="nomUtilisateur" name="nomUtilisateur"/>
                                <br><br>
                                <label class="pure-input-1-2" for="motDePasse">Mot de passe: </label>
-                               <input type="text" class="pure-input-1-2" id="motDePasse" name="motDePasse"/>
+                               <input type="password" class="pure-input-1-2" id="motDePasse" name="motDePasse"/>
                                <br><br><br>
-                               <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">Se sonnecter</button>
+                               <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">Se connecter</button>
                                <br><br>
                             </div>
                             
