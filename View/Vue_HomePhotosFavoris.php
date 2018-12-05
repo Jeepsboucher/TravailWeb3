@@ -11,7 +11,7 @@
        <?php while ($donnees = $resultatLesPlusAimees->fetch()) {    
             ?>
             <div class="pure-u-1-1 pure-u-md-1-1 pure-u-lg-7-24" id="1" style="vertical-align:middle;text-align:center;">
-                <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" style="width:auto;height:auto;max-width:300px;cursor:pointer" onclick="modal(this)"
+                <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description'] ?>" alt="<?php echo $donnees['nom']?>" style="width:auto;height:auto;max-width:300px;cursor:pointer" onclick="modal(this)"
                 class="modal-hover-opacity">
                  <div>
                      <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;position:relative;top:2px;" onclick="AddToFavorites('<?php echo $donnees['id_photo']?>')">
@@ -48,7 +48,7 @@
            <?php while ($donnees = $resultatFavoris->fetch()) {    
             ?>
             <div class="pure-u-1">
-                <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" style="width:auto;height:auto;max-width:300px;cursor:pointer" onclick="modal(this)"
+                <img class="pure-img" src="<?php echo $donnees['path']?>" title="<?php echo $donnees['description']?>" alt="<?php echo $donnees['nom']?>" style="width:auto;height:auto;max-width:300px;cursor:pointer" onclick="modal(this)"
                 class="modal-hover-opacity">
                 <div>
                     <i id="img<?php echo $donnees['id_photo']?>" class="material-icons" style="cursor:pointer;position:relative;top:2px;" onclick="AddToFavorites('<?php echo $donnees['id_photo']?>')">

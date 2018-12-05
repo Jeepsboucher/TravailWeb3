@@ -395,7 +395,7 @@ begin
     group by id_photo 
     order by vote DESC;
     
-    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_pays.nom, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
@@ -403,6 +403,8 @@ begin
     ON tbl_photo.id_photo = Favoris.id_photo
 	LEFT JOIN VoteUsager
     ON tbl_photo.id_photo = VoteUsager.id_photo
+	LEFT JOIN tbl_pays
+    ON tbl_pays.id_pays = tbl_photo.id_pays
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC
     LIMIT 10;
@@ -442,7 +444,7 @@ BEGIN
     group by id_photo 
     order by vote DESC;
     
-    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_pays.nom, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
@@ -450,7 +452,9 @@ BEGIN
     ON tbl_photo.id_photo = Favoris.id_photo
 	LEFT JOIN VoteUsager
     ON tbl_photo.id_photo = VoteUsager.id_photo
-    WHERE id_categorie = vcodeCategorie
+    LEFT JOIN tbl_pays
+    ON tbl_pays.id_pays = tbl_photo.id_pays
+    WHERE id_categorie = '1'
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC;
     
@@ -491,14 +495,16 @@ BEGIN
     group by id_photo 
     order by vote DESC;
     
-    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    SELECT Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_pays.nom, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
     LEFT JOIN Favoris
     ON tbl_photo.id_photo = Favoris.id_photo
 	LEFT JOIN VoteUsager
-    ON tbl_photo.id_photo = VoteUsager.id_photo
+	ON tbl_photo.id_photo = VoteUsager.id_photo
+    LEFT JOIN tbl_pays
+    ON tbl_photo.id_pays = tbl_pays.id_pays
     GROUP BY tbl_photo.id_photo
     ORDER BY NombreFavoris DESC;
     
@@ -542,7 +548,7 @@ BEGIN
     order by tbl_vote_photo.date_vote DESC;
     
 
-    SELECT VoteUsager.date_vote, Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_photo.id_pays, tbl_photo.id_categorie
+    SELECT VoteUsager.date_vote, Favoris.nombreFavoris, VoteUsager.bool_vote, tbl_photo.id_photo, tbl_photo.path, tbl_photo.description, tbl_photo.id_participant, tbl_pays.nom, tbl_photo.id_pays, tbl_photo.id_categorie
     FROM tbl_photo
     LEFT JOIN tbl_vote_photo
     ON tbl_vote_photo.id_photo = tbl_photo.id_photo
@@ -550,6 +556,8 @@ BEGIN
     ON tbl_photo.id_photo = Favoris.id_photo
 	LEFT JOIN VoteUsager
     ON tbl_photo.id_photo = VoteUsager.id_photo
+	LEFT JOIN tbl_pays
+    ON tbl_photo.id_pays = tbl_pays.id_pays
     WHERE bool_vote = 1
     GROUP BY tbl_photo.id_photo
     ORDER BY VoteUsager.date_vote DESC

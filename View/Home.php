@@ -16,22 +16,6 @@
     <br>
     <div id="liste_des_photos_et_favoris"></div>
     <br>
-    
-    <div id="modal01" class="modal" onclick="this.style.display='none'">
-        <span class="close">&times;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <div class="modal-content" style="text-align:center">
-            <img id="img01" style="max-width:99%">
-            <br><br>
-            <label id="label01" style="color:white;" ></label>
-        </div>
-    </div>
-     <script>
-        function modal(element) {
-        document.getElementById("img01").src = element.src;
-        document.getElementById("label01").textContent = element.title;
-        document.getElementById("modal01").style.display = "block";
-        }
-    </script>
 </form>
 
 
